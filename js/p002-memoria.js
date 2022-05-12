@@ -8,6 +8,7 @@ var jocCartes = [
 
 ];
 
+var c0, c1;
 
 $(function(){
     var f, c, carta;
@@ -32,8 +33,26 @@ $(function(){
            
         }
 
-    $(".carta").click(function(){
+    $(".carta").click(function () {
         $(this).toggleClass("carta-girada");
+        var card = $(this).find('.davant');
+        if (!c0) {
+            c0 = card;
+        } else {
+            if (c0.attr('class') == card.attr('class')) {
+                setTimeout(function() {
+                    c0.hide();
+                    card.hide();
+                    c0 = null;
+                }, 1000);
+            } else {
+                setTimeout(function() {
+                    $(c0).toggleClass("carta-girada");
+                    $(card).toggleClass("carta-girada");
+                    c0 = null;
+                }, 1000);
+            }
+        }
     });
 
 });
