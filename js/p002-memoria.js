@@ -5,7 +5,6 @@ var nFiles=2, nColumnes=2;
 var jocCartes = [
     'carta5', 'carta5',
     'carta15', 'carta15',
-
 ];
 
 var c0, c1;
@@ -13,6 +12,9 @@ var c0, c1;
 $(function(){
     var f, c, carta;
  
+    console.log(jocCartes);
+    jocCartes = suffleCards(jocCartes);
+    console.log(jocCartes);
 
     ampladaCarta=$(".carta").width(); 
     alcadaCarta=$(".carta").height();
@@ -47,8 +49,8 @@ $(function(){
                 }, 1000);
             } else {
                 setTimeout(function() {
-                    $(c0).toggleClass("carta-girada");
-                    $(card).toggleClass("carta-girada");
+                    c0.removeClass("carta-girada");
+                    card.removeClass("carta-girada");
                     c0 = null;
                 }, 1000);
             }
@@ -56,3 +58,19 @@ $(function(){
     });
 
 });
+
+
+function suffleCards(cards) { 
+    let res = [];
+    
+    let len = cards.length;
+
+    for (let i = 0; i < len; i++) { 
+        let random_card_index = Math.floor(Math.random()*cards.length);
+        res.push(cards[random_card_index]);
+        cards.splice(random_card_index, 1);
+        console.log(cards);
+    }
+
+    return res;
+}
