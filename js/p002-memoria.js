@@ -4,6 +4,7 @@ var nFiles = 2, nColumnes = 2;
 
 var clicks = 0;
 var clickEnabled = true;
+var correct = 0;
 
 var cards = [
     'carta1',
@@ -70,9 +71,10 @@ $(function () {
 
     $(".carta").click(function () {
         if (!clickEnabled) return;
-        if(c0)
+        if (c0)
             if ($(this).attr('id') == c0.parent().attr('id')) return;
         clicks++;
+        $('#nclicks').text(clicks);
         $(this).toggleClass("carta-girada");
         var card = $(this).find('.davant');
         if (!c0) {
@@ -80,7 +82,8 @@ $(function () {
         } else {
             clickEnabled = false;
             if (c0.attr('class') == card.attr('class')) {
-                setTimeout(function() {
+                correct++;
+                setTimeout(function () {
                     c0.fadeOut('fast', function () { 
                         $(this).parent().remove();
                     });
@@ -90,6 +93,11 @@ $(function () {
                     c0 = null;
                     clickEnabled = true;
                 }, 500);
+                
+                // Comprovar victoria
+                if (correct == (nFiles * nColumnes) / 2) { 
+                    $('.victory').fadeIn();
+                }
             } else {
                 setTimeout(function() {
                     c0.parent().removeClass("carta-girada");
@@ -99,10 +107,17 @@ $(function () {
                 }, 1000);
             }
         }
+        // Comprovar derrota
+        if (clicks >= nFiles * nColumnes * 3) { 
+            $('.loss').fadeIn();
+        }
+    });
+
+    $('.replay').click(function () { 
+        location.reload();
     });
 
 });
-
 
 /**
  * Barrejar aleatoriament un array
