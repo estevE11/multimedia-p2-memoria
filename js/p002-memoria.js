@@ -85,6 +85,7 @@ $(function () {
             clickEnabled = false;
             if (c0.attr('class') == card.attr('class')) {
                 correct++;
+                $('#ncorrect').text(correct);
                 setTimeout(function () {
                     c0.fadeOut('fast', function () { 
                         $(this).parent().remove();
