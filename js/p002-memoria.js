@@ -1,6 +1,9 @@
 var ampladaCarta, alcadaCarta;
 var separacioH=20, separacioV=20;
-var nFiles = 4, nColumnes = 4;
+var nFiles = 2, nColumnes = 2;
+
+var clicks = 0;
+var clickEnabled = true;
 
 var cards = [
     'carta1',
@@ -66,22 +69,33 @@ $(function () {
     }
 
     $(".carta").click(function () {
+        if (!clickEnabled) return;
+        if (c0)
+            if ($(this) == c0.parent()) return;
+        clicks++;
         $(this).toggleClass("carta-girada");
         var card = $(this).find('.davant');
         if (!c0) {
             c0 = card;
         } else {
+            clickEnabled = false;
             if (c0.attr('class') == card.attr('class')) {
                 setTimeout(function() {
-                    c0.fadeOut('fast');
-                    card.fadeOut('fast');
+                    c0.fadeOut('fast', function () { 
+                        $(this).parent().remove();
+                    });
+                    card.fadeOut('fast', function () {
+                        $(this).parent().remove();
+                    });
                     c0 = null;
+                    clickEnabled = true;
                 }, 500);
             } else {
                 setTimeout(function() {
                     c0.parent().removeClass("carta-girada");
                     card.parent().removeClass("carta-girada");
                     c0 = null;
+                    clickEnabled = true;
                 }, 1000);
             }
         }
