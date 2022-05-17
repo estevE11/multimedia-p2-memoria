@@ -70,8 +70,8 @@ $(function () {
 
     $(".carta").click(function () {
         if (!clickEnabled) return;
-        if (c0)
-            if ($(this) == c0.parent()) return;
+        if(c0)
+            if ($(this).attr('id') == c0.parent().attr('id')) return;
         clicks++;
         $(this).toggleClass("carta-girada");
         var card = $(this).find('.davant');
