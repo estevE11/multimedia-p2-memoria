@@ -1,6 +1,6 @@
 var ampladaCarta, alcadaCarta;
 var separacioH=20, separacioV=20;
-var nFiles = 2, nColumnes = 2;
+var nFiles = 4, nColumnes = 4;
 
 var cards = [
     'carta1',
@@ -31,8 +31,17 @@ var c0, c1;
 $(function () {
     var f, c, carta;
 
+    // mida del tauler
+    $("#tauler").css({
+        "width": "220px",
+        "height": "300px"
+    });
+
     if (nFiles == 2) {
         cards = cards.splice(0, 4);
+    } else {
+        $('#tauler').css('width', '420px');
+        $('#tauler').css('height', '580px');
     }
     jocCartes = cards;
     
@@ -40,11 +49,6 @@ $(function () {
 
     ampladaCarta = $(".carta").width();
     alcadaCarta = $(".carta").height();
-    // mida del tauler
-    $("#tauler").css({
-        "width": "220px",
-        "height": "300px"
-    });
     // inicialitzem totes les cartes: posició
     for (f = 1; f <= nFiles; f++) {
         for (c = 1; c <= nColumnes; c++) {
@@ -67,7 +71,6 @@ $(function () {
         if (!c0) {
             c0 = card;
         } else {
-            console.log(c0.attr('class'), '/',  card.attr('class'));
             if (c0.attr('class') == card.attr('class')) {
                 setTimeout(function() {
                     c0.fadeOut('fast');
