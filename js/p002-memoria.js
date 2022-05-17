@@ -67,16 +67,17 @@ $(function () {
         if (!c0) {
             c0 = card;
         } else {
+            console.log(c0.attr('class'), '/',  card.attr('class'));
             if (c0.attr('class') == card.attr('class')) {
                 setTimeout(function() {
-                    c0.hide();
-                    card.hide();
+                    c0.fadeOut('fast');
+                    card.fadeOut('fast');
                     c0 = null;
-                }, 1000);
+                }, 500);
             } else {
                 setTimeout(function() {
-                    c0.removeClass("carta-girada");
-                    card.removeClass("carta-girada");
+                    c0.parent().removeClass("carta-girada");
+                    card.parent().removeClass("carta-girada");
                     c0 = null;
                 }, 1000);
             }
