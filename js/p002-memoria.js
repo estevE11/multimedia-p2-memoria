@@ -1,6 +1,6 @@
 var ampladaCarta, alcadaCarta;
 var separacioH=20, separacioV=20;
-var nFiles = 2, nColumnes = 2;
+var nFiles = 4, nColumnes = 4;
 
 var clicks = 0;
 var clickEnabled = true;
