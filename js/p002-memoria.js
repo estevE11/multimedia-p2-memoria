@@ -34,6 +34,7 @@ var c0, c1;
 
 $(function () {
     var f, c, carta;
+    $('#nloss').text((nFiles * nColumnes * 3) - clicks);
 
     // mida del tauler
     $("#tauler").css({
@@ -75,6 +76,7 @@ $(function () {
             if ($(this).attr('id') == c0.parent().attr('id')) return;
         clicks++;
         $('#nclicks').text(clicks);
+        $('#nloss').text((nFiles * nColumnes * 3) - clicks);
         $(this).toggleClass("carta-girada");
         var card = $(this).find('.davant');
         if (!c0) {
