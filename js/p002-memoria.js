@@ -33,6 +33,37 @@ var jocCartes = [
 var c0, c1;
 
 $(function () {
+    $('.btn-play').click(function () { 
+        if ($(this).attr('id') == 'play4') { 
+            nFiles = 4;
+            nColumnes = 4;
+        }
+        startGame();
+    });
+
+    $('.btn-menu').click(backToMenu)
+});
+
+function setup() { 
+    clicks = 0;
+    clickEnabled = true;
+    correct = 0;
+    $('#tauler').empty();
+    $('#tauler').html('<div hidden class="carta"></div>');
+    $('#nclicks').text(0);
+}
+
+function backToMenu() { 
+    $('.play-state').hide();
+    $('.modal').hide();
+    $('.menu').show();
+}
+
+function startGame() {
+    $('.play-state').show();
+    $('.menu').hide();
+    setup();
+
     var f, c, carta;
     $('#nloss').text((nFiles * nColumnes * 3) - clicks);
 
@@ -42,15 +73,17 @@ $(function () {
         "height": "300px"
     });
 
+    var jocCartes = [...cards];
     if (nFiles == 2) {
-        cards = cards.splice(0, 4);
+        jocCartes = jocCartes.splice(0, 4);
     } else {
         $('#tauler').css('width', '420px');
         $('#tauler').css('height', '580px');
     }
-    jocCartes = cards;
-    
+
     jocCartes = suffleArray(jocCartes);
+    console.log("!!!!");
+    console.log(jocCartes);
 
     ampladaCarta = $(".carta").width();
     alcadaCarta = $(".carta").height();
@@ -88,7 +121,7 @@ $(function () {
                 correct++;
                 $('#ncorrect').text(correct);
                 setTimeout(function () {
-                    c0.fadeOut('fast', function () { 
+                    c0.fadeOut('fast', function () {
                         $(this).parent().remove();
                     });
                     card.fadeOut('fast', function () {
@@ -97,14 +130,14 @@ $(function () {
                     c0 = null;
                     clickEnabled = true;
                 }, 500);
-                
+
                 // Comprovar victoria
-                if (correct == (nFiles * nColumnes) / 2) { 
+                if (correct == (nFiles * nColumnes) / 2) {
                     $('.victory').fadeIn();
                     playSound('win');
                 }
             } else {
-                setTimeout(function() {
+                setTimeout(function () {
                     c0.parent().removeClass("carta-girada");
                     card.parent().removeClass("carta-girada");
                     playSound('turn');
@@ -114,16 +147,18 @@ $(function () {
             }
         }
         // Comprovar derrota
-        if (clicks >= nFiles * nColumnes * 3) { 
+        if (clicks >= nFiles * nColumnes * 3) {
             $('.loss').fadeIn();
         }
     });
 
-    $('.replay').click(function () { 
-        location.reload();
+    $('.replay').click(function () {
+        //location.reload();
+        startGame();
+        $('.replay').parent().parent().fadeOut('fast');
     });
 
-});
+}
 
 /**
  * Barrejar aleatoriament un array

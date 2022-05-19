@@ -141,3 +141,13 @@ body {
 .loss .modal-bg, .loss .modal-content  {
     background-color: red;
 }
+
+
+.btn-play {
+    font-size: 30px;
+    padding: 30px;
+}
+
+button {
+    cursor: pointer;
+}

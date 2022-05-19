@@ -9,29 +9,35 @@
 </head>
 <body>
 <header>
-    <h1>4x4 cartes - DEMO</h1>
+    <h1>Joc de memoria</h1>
 </header>
 
-<h3>Numero de clicks: <span id="nclicks">0</span></h3>
-<h3>Clicks per perdre: <span id="nloss">0</span></h3>
-<h3>Cartes girades: <span id="ncorrect">0</span></h3>
 
-<!--
 <div class="menu">
-    <label for="nfiles">Numero files/columnes</label>
-    <input id="nfiles" type="number" value="2" min="2" max="4" step="2">
-    <br>
-    <button class="btn-play" id="play">JUGAR</button>
+    <button class="btn-play" id="play2">2x2</button>
+    <button class="btn-play" id="play4">4x4</button>
 </div>
--->
-<div id="tauler">
-<div hidden class="carta"></div>
+
+<div hidden class="play-state">
+    <div class="stats">
+        <h3>Numero de clicks: <span id="nclicks">0</span></h3>
+        <h3>Clicks per perdre: <span id="nloss">0</span></h3>
+        <h3>Cartes girades: <span id="ncorrect">0</span></h3>
+    </div>
+    
+    <div id="tauler">
+    
+    </div>
+    <div class="footer">
+        <p>Fes clic en una carta per donar-li la volta</p>
+    </div>
 </div>
 
 <div hidden class="modal victory">
     <div class="modal-bg"></div>
     <div class="modal-content">
         <h2>HAS GUANYAT</h2>
+        <button class="btn-menu">Tornar al menu</button>
         <button class="replay">Tornar a jugar</button>
     </div>
 </div>
@@ -40,13 +46,10 @@
     <div class="modal-bg"></div>
     <div class="modal-content">
         <h2>HAS PERDUT</h2>
+        <button class="btn-menu">Tornar al menu</button>
         <button class="replay">Tornar a jugar</button>
     </div>
 </div>
-
-<footer>
-    <p>Fes clic en una carta per donar-li la volta</p>
-</footer>
 
 <audio src="so/turn.wav" id="sound_turn"></audio>
 <audio src="so/win.mp3" id="sound_win"></audio>
