@@ -1,6 +1,6 @@
 var ampladaCarta, alcadaCarta;
 var separacioH=20, separacioV=20;
-var nFiles = 4, nColumnes = 4;
+var nFiles = 2, nColumnes = 2;
 
 var clicks = 0;
 var clickEnabled = true;
@@ -78,6 +78,7 @@ $(function () {
         $('#nclicks').text(clicks);
         $('#nloss').text((nFiles * nColumnes * 3) - clicks);
         $(this).toggleClass("carta-girada");
+        playSound('turn');
         var card = $(this).find('.davant');
         if (!c0) {
             c0 = card;
@@ -100,11 +101,13 @@ $(function () {
                 // Comprovar victoria
                 if (correct == (nFiles * nColumnes) / 2) { 
                     $('.victory').fadeIn();
+                    playSound('win');
                 }
             } else {
                 setTimeout(function() {
                     c0.parent().removeClass("carta-girada");
                     card.parent().removeClass("carta-girada");
+                    playSound('turn');
                     c0 = null;
                     clickEnabled = true;
                 }, 1000);
@@ -143,4 +146,13 @@ function suffleArray(arr) {
     }
 
     return res;
+}
+
+/**
+ * Emet un so
+ * 
+ * @param {String} sound 
+ */
+function playSound(sound) { 
+    document.getElementById("sound_" + sound).play();
 }
