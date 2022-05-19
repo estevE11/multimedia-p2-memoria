@@ -21,6 +21,8 @@ body {
     position: absolute;
     -webkit-perspective: 300px; /* Chrome, Safari, Opera  */
     perspective: 300px;/*transition: all .3s; */
+
+    cursor: pointer;
 }
 
 .carta:hover .cara{
